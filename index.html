@@ -10,8 +10,6 @@
 
 		<!-- Other Tags -->
 		<link type="text/css" rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 		<!-- CSS Dependencies -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -24,43 +22,53 @@
 			<img src="images/logo.png" alt="Example Navbar 1" class="mr-2" height="30">
 			<a class="navbar-brand" href="#">Weather Wear</a>
 		</nav>
-
-		<div class="jumbotron jumbotron-fluid">
-		  <div class="container">
-		    <h1 class="display-4">Weather Wear</h1>
-		    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-		  </div>
-		</div>
-
+		<p></p>
 		<div class="container">
 		  <div class="row">
         <div class="card col-md-12">
           <div class="card-body">
-                  <h3 class="card-title">Weather</h3>
+          	<h1 class="card-title">Weather</h1>
           </div>
         </div>
 		  </div>
+			<p></p>
 			<div class="row">
-				<p></p>
-			</div>
-			<div class="row">
+				<!-- Details -->
 		    <div class="col-sm-6">
 					<div class="card">
-			      <img class="card-img-top" src="..." alt="Card image cap">
+			      <img class="card-img-top" src="images/details.png" alt="Card image cap">
 			      <div class="card-body">
-			        <h4 class="card-title">Sample Card Title</h4>
-			        <p class="card-text">He seems sinking under the evidence could not only grieve and a visit. The father is to bless and placed in his length hid...</p>
-			        <a href="#" class="btn btn-primary">Tell me more &rarr;</a>
+			        <h4 class="card-title">Details</h4>
+			        <p class="card-text">Update information</p>
 			      </div>
 			    </div>
 		    </div>
+				<!-- Suggestion -->
 		    <div class="col-sm-6">
 					<div class="card">
-			      <img class="card-img-top" src="..." alt="Card image cap">
+			      <img class="card-img-top" src="images/suggest.png" alt="Card image cap">
 			      <div class="card-body">
 			        <h4 class="card-title">Suggestion</h4>
-			        <p class="card-text">Today asdfasd</p>
-			        <a href="#" class="btn btn-primary">Tell me more &rarr;</a>
+			        <p class="card-text">What should you wear?</p>
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+							  Launch Model
+							</button>
+							<!-- Suggestion -->
+							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="exampleModalLabel">Our Suggestion</h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+							        Here is our prediciton.
+							      </div>
+							    </div>
+							  </div>
+							</div>
 			      </div>
 			    </div>
 		    </div>
