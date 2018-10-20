@@ -42,7 +42,7 @@
 			</div> <!-- .site-header -->
 
 			<!-- Background -->
-			<div class="hero" data-bg-image="images/wallpaper.png"></div>
+			<!-- <div class="hero" data-bg-image="images/wallpaper.png"></div> -->
 
 			<!-- Table -->
 			<div class="forecast-table">
@@ -145,16 +145,17 @@
 
 
 			<!-- Add -->
-			<div class="fullwidth-block">
+			<div class="fullwidth-block" style="padding: 50px">
 				<div class="container">
 					<div class="row">
+						<!-- Feedback -->
             <div class="col-md-7">
 						  <h2 class="section-title">How was this suggestion?</h2>
 						  <div class="filter">
 						  	<div class="count filter-control">
 						  		<label for="">Mood</label>
 						  		<span class="select control">
-						  			<select name="" id="">
+						  			<select name="" id="feedback">
 						  				<option value="-1">Too Hot!</option>
 						  				<option value="0" selected="selected">Just Right!</option>
 						  				<option value="1">Too Cold!</option>
@@ -162,11 +163,12 @@
 						  		</span>
 						  	</div>
 						  	<p></p>
-						  	<form action="#" class="subscribe-form">
+						  	<form action="#" class="subscribe-form" onclick="submitFeedback()">
 						  		<input type="submit" value="Submit">
 						  	</form>
 						  </div>
             </div>
+						<!-- suggestion -->
             <div class="col-md-5">
               <div class="sidebar">
                 <div class="widget">
@@ -197,6 +199,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script src="js/app.js"></script>
     <script src="js/weatherData.js"></script>
+		<script src="js/updateIcon.js"></script>
 	</body>
 
 </html>
