@@ -7,7 +7,7 @@ const optimizer = tf.train.sgd(learningRate);
 
 function predict(x) {
   return tf.tidy(() => {
-    return coeff.matMul(x);
+    return coeff.matMul(x).add(bias);
   });
 }
 
@@ -26,13 +26,34 @@ async function train(xs, ys, numIterations) {
   }
 }
 
-async function learnCoefficients(data) {
-  const before = predict(data.xs);
+async function learnCoefficients(values, feels) {
+  const before = predict(values);
 
-  await train(data.xs, data.ys, numIterations);
-  
-  const after =  predict(data.xs);
+  await train(values, feels, numIterations);
+
+  const after =  predict(values);
   
   before.dispose();
   after.dispose();
 }
+
+function main() {
+
+  var values = [];
+  var feels = [];
+  for (let i = 0; i < 1000; i++) {
+    values[i] = []; 
+    values[i].push(dataset[i].temperature);
+    values[i].push(dataset[i].humid);
+    values[i].push(dataset[i].wind);
+  
+    feels[i] = dataset[i].feel;
+  }
+
+  for (let i = 0; i < 1000; i++) {
+    learnCoefficients(values[i], feels[i]);
+
+  }
+
+}
+main();
