@@ -8,5 +8,5 @@ if len(sys.argv) > 1:
 else:
     output = "no argument found"
 
-print "Hello World!"
+print "Error, Your ajax call failed"
 print output
