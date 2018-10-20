@@ -6,6 +6,7 @@ $(document).ready(function() {
     const months = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     let today = new Date();
+    console.log(today);
     let day = today.getDay();
     let month = today.getMonth();
     let date = today.getDate();
@@ -18,7 +19,7 @@ $(document).ready(function() {
     let summary = document.getElementById('summary');
 
     currDay.innerHTML = days[day];
-    currTemp.innerHTML = Math.floor(data.currently.temperature) + '°C';
+    currTemp.innerHTML = Math.floor(data.currently.temperature) + '°F';
     currDate.innerHTML = date + ' ' + months[month];
     city.innerHTML = thisCity;
     summary.innerHTML = data.currently.summary;
@@ -35,8 +36,8 @@ $(document).ready(function() {
       nextMin = document.getElementById('nextMin' + (i+1));
 
       nextDay.innerHTML = days[index];
-      nextMax.innerHTML = Math.round(data.daily.data[i].temperatureHigh) + '°C';
-      nextMin.innerHTML = Math.round(data.daily.data[i].temperatureMin) + '°C';
+      nextMax.innerHTML = Math.round(data.daily.data[i].temperatureHigh) + '°F';
+      nextMin.innerHTML = Math.round(data.daily.data[i].temperatureMin) + '°F';
 
     }
   }
@@ -47,7 +48,7 @@ $(document).ready(function() {
   let lng = -86.921162;
   let url = darksky + key + '/' + lat + ',' + lng;
   console.log(url);
-  url = url.concat('?units=ca');
+  url = url.concat('?units=us');
   
   $.ajax({
     url: url,
