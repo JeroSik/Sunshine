@@ -42,17 +42,18 @@ function main() {
   coeff.print();
   var values = [];
   var feels = [];
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < dataset.length; i++) {
     values[i] = []; 
     values[i].push(dataset[i].temperature);
     values[i].push(dataset[i].humid);
     values[i].push(dataset[i].wind);
   
-    feels[i] = dataset[i].feel;
+    feels.push(dataset[i].feel);
   }
 
   for (let i = 0; i < 1000; i++) {
-    learnCoefficients(tf.variable(tf.tensor(values[i], [3, 1])), feels[i]);
+    coeff.print();
+    learnCoefficients(tf.variable((tf.tensor(values[i], [3, 1]))), feels[i]);
   }
   coeff.print();
 
