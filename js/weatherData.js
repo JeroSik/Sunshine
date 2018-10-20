@@ -1,9 +1,30 @@
 $(document).ready(function() {
 
   function render(data) {
-    let temp = document.getElementById();
+    
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sunday'];
+    const months = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    let today = new Date();
+    let day = today.getDay();
+    let month = today.getMonth();
+    let date = today.getDate();
+    let thisCity = data.timezone.split('/')[2];
+
+    let currDay = document.getElementById('currDay');
+    let currTemp = document.getElementById('currTemp');
+    let currDate = document.getElementById('currDate');
+    let city = document.getElementById('city');
+    let summary = document.getElementById('summary');
+
+    currDay.innerHTML = days[day];
+    currTemp.innerHTML = Math.floor(data.currently.temperature) + '°C';
+    currDate = date + months[month];
+    city.innerHTML = thisCity;
+    summary.innerHTML = data.currently.summary;
   }
 
+  let darksky = 'https://api.darksky.net/forecast/';
   let key = 'bf3559fca2202670fd98af01a08f00b8';
   let lat = 40.429048;
   let lng = -86.921162;
@@ -24,7 +45,6 @@ $(document).ready(function() {
   });
   
 
-}
 
 const client = stitch.Stitch.initializeDefaultAppClient('weatherwear-lhpvt');
 const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('owm');
@@ -40,6 +60,7 @@ client.auth.loginWithCredential(new stitch.AnonymousCredential()).then(user =>
   console.error(err)
 });
 
+})
 //});
 /*
 <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.0.8/stitch.js"></script>
