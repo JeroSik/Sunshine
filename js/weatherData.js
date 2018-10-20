@@ -36,8 +36,8 @@ $(document).ready(function() {
       nextMin = document.getElementById('nextMin' + (i+1));
 
       nextDay.innerHTML = days[index];
-      nextMax.innerHTML = Math.round(data.daily.data[i].temperatureHigh);
-      nextMin.innerHTML = Math.round(data.daily.data[i].temperatureMin);
+      nextMax.innerHTML = Math.round(data.daily.data[i].temperatureHigh) + '°C';
+      nextMin.innerHTML = Math.round(data.daily.data[i].temperatureMin) + '°C';
 
     }
   }
