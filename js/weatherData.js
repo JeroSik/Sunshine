@@ -2,11 +2,12 @@ $(document).ready(function() {
 
   function render(data) {
     
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sunday'];
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const months = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     let today = new Date();
     let day = today.getDay();
+    console.log(day);
     let month = today.getMonth();
     let date = today.getDate();
     let thisCity = data.timezone.split('/')[2];
@@ -19,9 +20,26 @@ $(document).ready(function() {
 
     currDay.innerHTML = days[day];
     currTemp.innerHTML = Math.floor(data.currently.temperature) + '°C';
-    currDate = date + months[month];
+    currDate.innerHTML = date + ' ' + months[month];
     city.innerHTML = thisCity;
     summary.innerHTML = data.currently.summary;
+
+    let index;
+    let nextDay;
+    let nextMax;
+    let nextMin;
+
+    for (let i = 0; i < 6; i++) {
+      index = (day + i + 1) % 7;
+      nextDay = document.getElementById('nextDay' + (i+1));
+      nextMax = document.getElementById('nextMax' + (i+1));
+      nextMin = document.getElementById('nextMin' + (i+1));
+
+      nextDay.innerHTML = days[index];
+      nextMax.innerHTML = Math.round(data.daily.data[i].temperatureHigh);
+      nextMin.innerHTML = Math.round(data.daily.data[i].temperatureMin);
+
+    }
   }
 
   let darksky = 'https://api.darksky.net/forecast/';
