@@ -62,6 +62,17 @@ $(document).ready(function() {
     }
   });
 
+  $.ajax({
+    type: 'POST',
+    url: 'http://localhost/py/bingo.py',
+    data: {"param": "lol"},
+    dataType: 'text',
+    success: function(res) {
+      output = res;
+      alert(output);
+    }
+  })
+
 })
   
 /*
