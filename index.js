@@ -40,7 +40,7 @@ function generateData(numPoints, coeff, sigma = 0.04) {
       const xs = tf.randomUniform([numPoints], -1, 1);
 
       // Generate polynomial data
-      const ys = a.mul(xs).add(b).add(Math.random()*2);
+      const ys = a.mul(xs).add(b).add(Math.random()*10);
 
       // Normalize the y values to the range 0 to 1.
       //const ymin = ys.min();
