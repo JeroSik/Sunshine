@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   function render(data) {
-    
+
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const months = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -17,12 +17,14 @@ $(document).ready(function() {
     let currDate = document.getElementById('currDate');
     let city = document.getElementById('city');
     let summary = document.getElementById('summary');
+    let icon = document.getElementById('currIcon');
 
     currDay.innerHTML = days[day];
     currTemp.innerHTML = Math.floor(data.currently.temperature) + '°F';
     currDate.innerHTML = date + ' ' + months[month];
     city.innerHTML = thisCity;
     summary.innerHTML = data.currently.summary;
+    icon.src = updateIcon();
 
     let index;
     let nextDay;
@@ -49,7 +51,7 @@ $(document).ready(function() {
   let url = darksky + key + '/' + lat + ',' + lng;
   console.log(url);
   url = url.concat('?units=us');
-  
+
   $.ajax({
     url: url,
     dataType: 'jsonp',
@@ -74,15 +76,15 @@ $(document).ready(function() {
   })
 
 })
-  
+
 /*
 
 const client = stitch.Stitch.initializeDefaultAppClient('weatherwear-lhpvt');
 const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('owm');
 
-client.auth.loginWithCredential(new stitch.AnonymousCredential()).then(user => 
+client.auth.loginWithCredential(new stitch.AnonymousCredential()).then(user =>
   db.collection('WeatherData').updateOne({owner_id: client.auth.user.id}, {$set:{number:42}}, {upsert:true})
-).then(() => 
+).then(() =>
   db.collection('WeatherData').find({owner_id: client.auth.user.id}, { limit: 100}).asArray()
 ).then(docs => {
   console.log("Found docs", docs)
