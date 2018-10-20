@@ -1,10 +1,11 @@
-import * as tf from '@tensorflow/tfjs';
+//import * as tf from '@tensorflow/tfjs';
 
-export function generateData(numPoints, coeff, sigma = 0.04) {
+
+function generateData(numPoints, coeff, sigma = 0.04) {
   return tf.tidy(() => {
-    const [a, b] = [
-      tf.scalar(coeff.a), tf.scalar(coeff.b)
-    ];
+      const [a, b] = [
+      tf.scalar(coeff.a, 0.2), tf.scalar(coeff.b, -12)
+      ];
 
       const xs = tf.randomUniform([numPoints], -1, 1);
 
@@ -21,8 +22,9 @@ export function generateData(numPoints, coeff, sigma = 0.04) {
       const ysNormalized = ys.sub(ymin).div(yrange);
 
       return {
-        xs, 
-          ys: ysNormalized
+      xs, 
+        ys: ysNormalized
       };
   })
 }
+

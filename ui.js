@@ -1,6 +1,6 @@
-import renderChart from 'vega-embed';
+//import renderChart from 'vega-embed';
 
-export async function plotData(container, xs, ys) {
+async function plotData(container, xs, ys) {
   const xvals = await xs.data();
   const yvals = await ys.data();
 
@@ -23,7 +23,7 @@ export async function plotData(container, xs, ys) {
   return renderChart(container, spec, {actions: false});
 }
 
-export async function plotDataAndPredictions(container, xs, ys, preds) {
+async function plotDataAndPredictions(container, xs, ys, preds) {
   const xvals = await xs.data();
   const yvals = await ys.data();
   const predVals = await preds.data();
@@ -59,7 +59,7 @@ export async function plotDataAndPredictions(container, xs, ys, preds) {
   return renderChart(container, spec, {actions: false});
 }
 
-export function renderCoefficients(container, coeff) {
+function renderCoefficients(container, coeff) {
   document.querySelector(container).innerHTML =
     `<span>a=${coeff.a.toFixed(3)}, b=${coeff.b.toFixed(3)}, c=${
       coeff.c.toFixed(3)},  d=${coeff.d.toFixed(3)}</span>`;
