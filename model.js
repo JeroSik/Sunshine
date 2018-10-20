@@ -1,5 +1,4 @@
-const values = tf.placeholder(tf.float, [1,3]);
-const coeff = tf.variable(tf.zeros[3,1]);
+const coeff = tf.tensor([Math.random(), Math.random(), Math.random()], [1, 3]);
 const bias = tf.variable(tf.scalar(Math.random()));
 
 const numIterations = 75;
@@ -8,7 +7,7 @@ const optimizer = tf.train.sgd(learningRate);
 
 function predict(x) {
   return tf.tidy(() => {
-    return tf.matmul(values, coeff);
+    return coeff.matMul(x);
   });
 }
 
@@ -29,6 +28,7 @@ async function train(xs, ys, numIterations) {
 
 async function learnCoefficients(data) {
   const before = predict(data.xs);
+
   await train(data.xs, data.ys, numIterations);
   
   const after =  predict(data.xs);
