@@ -56,6 +56,8 @@ function generateData(numPoints, coeff, sigma = 0.04) {
 }
 
 async function learnCoefficients() {
+  temp_a.print(); 
+
   const actual = {a: 0.2, b: -12};
   const trainingData = generateData(1000, actual);
 
@@ -80,6 +82,7 @@ async function learnCoefficients() {
   predictionsBefore.dispose();
   predictionsAfter.dispose();
 
+  temp_a.print(); 
 }
 
 learnCoefficients();

@@ -1,4 +1,4 @@
-const coeff = tf.tensor([Math.random(), Math.random(), Math.random()], [1, 3]);
+const coeff = tf.variable(tf.tensor([Math.random(), Math.random(), Math.random()], [1, 3]));
 const bias = tf.variable(tf.scalar(Math.random()));
 
 const numIterations = 75;
@@ -31,7 +31,7 @@ async function learnCoefficients(values, feels) {
 
   await train(values, feels, numIterations);
 
-  const after =  predict(values);
+  const after = predict(values);
   
   before.dispose();
   after.dispose();
@@ -39,6 +39,7 @@ async function learnCoefficients(values, feels) {
 
 function main() {
 
+  coeff.print();
   var values = [];
   var feels = [];
   for (let i = 0; i < 1000; i++) {
@@ -51,9 +52,9 @@ function main() {
   }
 
   for (let i = 0; i < 1000; i++) {
-    learnCoefficients(values[i], feels[i]);
-
+    learnCoefficients(tf.variable(tf.tensor(values[i], [3, 1])), feels[i]);
   }
+  coeff.print();
 
 }
 main();
