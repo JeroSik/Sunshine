@@ -19,7 +19,7 @@
 	<body>
 
 		<div class="site-content">
-			<div class="site-header">
+			<div class="site-header" data-bg-color="#262936">
 				<div class="container">
 					<a href="index.html" class="branding">
 						<img src="images/logo.png" alt="" class="logo">
@@ -71,81 +71,83 @@
 						</div>
 						<div class="forecast">
 							<div class="forecast-header">
-								<div class="day">Tuesday</div>
+								<div class="day" id="nextDay1">Tuesday</div>
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
 								<div class="forecast-icon">
 									<img src="images/icons/icon-3.svg" alt="" width=48>
 								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
+								<div class="degree" id="nextMax1">23<sup>o</sup>C</div>
+								<small id="nextMin1">18<sup>o</sup></small>
 							</div>
 						</div>
 						<div class="forecast">
 							<div class="forecast-header">
-								<div class="day">Wednesday</div>
+								<div class="day" id="nextDay2">Wednesday</div>
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
 								<div class="forecast-icon">
 									<img src="images/icons/icon-5.svg" alt="" width=48>
 								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
+								<div class="degree" id="nextMax2">23<sup>o</sup>C</div>
+								<small id="nextMin2">18<sup>o</sup></small>
 							</div>
 						</div>
 						<div class="forecast">
 							<div class="forecast-header">
-								<div class="day">Thursday</div>
+								<div class="day" id="nextDay3">Thursday</div>
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
 								<div class="forecast-icon">
 									<img src="images/icons/icon-7.svg" alt="" width=48>
 								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
+								<div class="degree" id="nextMax3">23<sup>o</sup>C</div>
+								<small id="nextMin3">18<sup>o</sup></small>
 							</div>
 						</div>
 						<div class="forecast">
 							<div class="forecast-header">
-								<div class="day">Friday</div>
+								<div class="day" id="nextDay4">Friday</div>
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
 								<div class="forecast-icon">
 									<img src="images/icons/icon-12.svg" alt="" width=48>
 								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
+								<div class="degree" id="nextMax4">23<sup>o</sup>C</div>
+								<small id="nextMin4">18<sup>o</sup></small>
 							</div>
 						</div>
 						<div class="forecast">
 							<div class="forecast-header">
-								<div class="day">Saturday</div>
+								<div class="day" id="nextDay5">Saturday</div>
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
 								<div class="forecast-icon">
 									<img src="images/icons/icon-13.svg" alt="" width=48>
 								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
+								<div class="degree" id="nextMax5">23<sup>o</sup>C</div>
+								<small id="nextMin5">18<sup>o</sup></small>
 							</div>
 						</div>
 						<div class="forecast">
 							<div class="forecast-header">
-								<div class="day">Sunday</div>
+								<div class="day" id="nextDay6">Sunday</div>
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
 								<div class="forecast-icon">
 									<img src="images/icons/icon-14.svg" alt="" width=48>
 								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
+								<div class="degree" id="nextMax6">23<sup>o</sup>C</div>
+								<small id="nextMin6">18<sup>o</sup></small>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+
+			<!-- Prediction -->
 			<main class="main-content">
-				<div class="fullwidth-block">
+				<div class="fullwidth-block" data-bg-color="#262936">
 					<div class="container">
 						<h2 class="section-title"></h2>
 						<div class="row">
@@ -157,25 +159,33 @@
 			<footer class="site-footer">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-8">
+						<h2 class="section-title">How do you feel right now?</h2>
+						<div class="filter">
+							<div class="count filter-control">
+								<label for="">Mood</label>
+								<span class="select control">
+									<select name="" id="">
+										<option value="-1">Too Low</option>
+										<option value="0" selected="selected">Just Right!</option>
+										<option value="1">Too High!</option>
+									</select>
+								</span>
+							</div>
+							<p></p>
 							<form action="#" class="subscribe-form">
-								<input type="text" placeholder="Enter your email to subscribe...">
-								<input type="submit" value="Subscribe">
+								<input type="submit" value="Submit">
 							</form>
 						</div>
-						<div class="col-md-3 col-md-offset-1">
-							<div class="social-links">
-								<a href="#"><i class="fa fa-facebook"></i></a>
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-google-plus"></i></a>
-								<a href="#"><i class="fa fa-pinterest"></i></a>
-							</div>
-						</div>
 					</div>
-
-					<p class="colophon">Copyright 2014 Company name. Designed by Themezy. All rights reserved</p>
 				</div>
-			</footer> <!-- .site-footer -->
+			</div>
+
+			<!-- Footer -->
+			<footer class="site-footer">
+				<div class="container">
+					<p class="colophon">Copyright BoilerMake 2018</p>
+				</div>
+			</footer>
 		</div>
 
 		<script src="js/jquery-1.11.1.min.js"></script>
@@ -186,5 +196,7 @@
     <script src="js/weatherData.js"></script>
     
 	</body>
-
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/app.js"></script>
 </html>
