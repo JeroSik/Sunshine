@@ -44,3 +44,23 @@ async function learnCoefficients() {
   });
 
   const predictionsBefore = predict(trainingData.xs);
+  await plotDataAndPredictions(
+    '#random .plot', trainingData.xs, trainingData.ys, predictionsBefore);
+  
+  await train(trainingData.xs, trainingData.ys, numIterations);
+
+  renderCoefficients('#trained .coeff', {
+    a: a.dataSync()[0],
+    b: b.dataSync()[0],
+  });
+
+  const predictionsAfter = predict(trainingData.xs);
+  await plotDataAndPredictions(
+    '#trained .plot', trainingData.xs, trainingData.ys, predictionsAfter);
+
+  predictionsBefore.dispose();
+  predictionsAfter.dispose();
+
+}
+
+learnCoefficients();
