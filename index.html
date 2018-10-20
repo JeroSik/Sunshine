@@ -7,8 +7,7 @@
 
 		<title>Compass Starter by Ariona, Rian</title>
 
-		<!-- Loading third party fonts -->
-		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+		<!-- Loading third party fonts --> <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
 		<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 		<!-- Loading main css file -->
@@ -56,6 +55,7 @@
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
 								<div class="location" id="city">New York</div>
+								<div class="location" id="summary">New York</div>
 								<div class="degree">
 									<div class="num" id="currTemp">23<sup>o</sup>C</div>
 									<div class="forecast-icon">
@@ -143,66 +143,45 @@
 				</div>
 			</div>
 
-			<!-- Prediction -->
-			<main class="main-content">
-				<div class="fullwidth-block" data-bg-color="#262936">
-					<div class="container">
-						<h2 class="section-title">Suggestion</h2>
-						<div class="row">
-							<div class="col-md-3 col-sm-6">
-								<div class="live-camera">
-									<figure class="live-camera-cover"><img src="images/live-camera-1.jpg" alt=""></figure>
-									<h3 class="location">New York</h3>
-									<small class="date">8 oct, 8:00AM</small>
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-6">
-								<div class="live-camera">
-									<figure class="live-camera-cover"><img src="images/live-camera-2.jpg" alt=""></figure>
-									<h3 class="location">Los Angeles</h3>
-									<small class="date">8 oct, 8:00AM</small>
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-6">
-								<div class="live-camera">
-									<figure class="live-camera-cover"><img src="images/live-camera-3.jpg" alt=""></figure>
-									<h3 class="location">Chicago</h3>
-									<small class="date">8 oct, 8:00AM</small>
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-6">
-								<div class="live-camera">
-									<figure class="live-camera-cover"><img src="images/live-camera-4.jpg" alt=""></figure>
-									<h3 class="location">London</h3>
-									<small class="date">8 oct, 8:00AM</small>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</main>
 
 			<!-- Add -->
 			<div class="fullwidth-block">
 				<div class="container">
 					<div class="row">
-						<h2 class="section-title">How do you feel right now?</h2>
-						<div class="filter">
-							<div class="count filter-control">
-								<label for="">Mood</label>
-								<span class="select control">
-									<select name="" id="">
-										<option value="-1">Too Low</option>
-										<option value="0" selected="selected">Just Right!</option>
-										<option value="1">Too High!</option>
-									</select>
-								</span>
-							</div>
-							<p></p>
-							<form action="#" class="subscribe-form">
-								<input type="submit" value="Submit">
-							</form>
-						</div>
+            <div class="col-md-7">
+						  <h2 class="section-title">How was this suggestion?</h2>
+						  <div class="filter">
+						  	<div class="count filter-control">
+						  		<label for="">Mood</label>
+						  		<span class="select control">
+						  			<select name="" id="">
+						  				<option value="-1">Too Hot!</option>
+						  				<option value="0" selected="selected">Just Right!</option>
+						  				<option value="1">Too Cold!</option>
+						  			</select>
+						  		</span>
+						  	</div>
+						  	<p></p>
+						  	<form action="#" class="subscribe-form">
+						  		<input type="submit" value="Submit">
+						  	</form>
+						  </div>
+            </div>
+            <div class="col-md-5">
+              <div class="sidebar">
+                <div class="widget">
+                  <h3 class="widget-title"> Here's how you should dress today! </h3>
+                  <div class="row">
+                    <div class="col-md-6 text-center">
+									    <img src="images/icons/icon-14.svg" alt="" width=48>
+                    </div>
+                    <div class="col-md-6">
+									    <img src="images/icons/icon-14.svg" alt="" width=48>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 					</div>
 				</div>
 			</div>
@@ -215,9 +194,9 @@
 			</footer>
 		</div>
 		<!--script src="js/plugins.js"></script-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script src="js/app.js"></script>
-    		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    		<script src="js/weatherData.js"></script>
+    <script src="js/weatherData.js"></script>
 	</body>
 
 </html>

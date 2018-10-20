@@ -7,7 +7,6 @@ $(document).ready(function() {
 
     let today = new Date();
     let day = today.getDay();
-    console.log(day);
     let month = today.getMonth();
     let date = today.getDate();
     let thisCity = data.timezone.split('/')[2];
@@ -61,8 +60,10 @@ $(document).ready(function() {
       console.log('you sucks tobi');
     }
   });
-  
 
+})
+  
+/*
 
 const client = stitch.Stitch.initializeDefaultAppClient('weatherwear-lhpvt');
 const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('owm');
@@ -79,7 +80,10 @@ client.auth.loginWithCredential(new stitch.AnonymousCredential()).then(user =>
 });
 
 })
-//});
+
+*/
+
+
 /*
 <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.0.8/stitch.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
