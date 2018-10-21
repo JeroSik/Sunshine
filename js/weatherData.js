@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
   function render(data) {
+
+    
     
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const months = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -28,17 +30,37 @@ $(document).ready(function() {
     let nextDay;
     let nextMax;
     let nextMin;
+    let nextIcon;
+    let iconNum;
 
     for (let i = 0; i < 6; i++) {
       index = (day + i + 1) % 7;
       nextDay = document.getElementById('nextDay' + (i+1));
       nextMax = document.getElementById('nextMax' + (i+1));
       nextMin = document.getElementById('nextMin' + (i+1));
+      nextIcon = document.getElementById('nextIcon' + (i+1));
+
 
       nextDay.innerHTML = days[index];
       nextMax.innerHTML = Math.round(data.daily.data[i].temperatureHigh) + '°F';
       nextMin.innerHTML = Math.round(data.daily.data[i].temperatureMin) + '°F';
 
+      if (data.daily.data[i].icon == 'rain') {
+        iconNum = 14;
+      } else if (data.daily.data[i].icon == 'tornado') {
+        iconNum = 8;
+      } else if (data.daily.data[i].icon == 'partly-cloudy-day') {
+        iconNum = 3;
+      } else if (data.daily.data[i].icon == 'partly-cloudy-night' || data.daily.data[i].icon == 'cloudy') {
+        iconNum = 5;
+      } else if (data.daily.data[i].icon == 'clear-day') {
+        iconNum = 1;
+      } else if (data.daily.data[i].icon == 'thunderstorm') {
+        iconNum = 1;
+      } else {
+        iconNum = 5;
+      }
+      nextIcon.innerHTML = '<img src="images/icons/icon-' + iconNum + '.svg" alt="" width=48>';
     }
 
     let beanie = '<img height="70px" width="70px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMXSURBVGhD7ZbLa9RQFMajC8FqBaELH0jpQjdabRX8G6zzEMSNrgQXUgVFXAq6ENFKGd+Zqd05JlPIoFLUosU2oyiV1iYt2EKRNhkt7tUiPtp4zvS0Jp072skk6RXzgw8m95x7zneSuZMRQkJCQirjdmaLkMy0CqLcWxB+TkqbKfqPIGaahaT8A8xbTuGadJSyOCclxeAJzBQPQcKYmGmibI5JZoaKzBdLo2xOuSFvYJhmK5VeT7s4JHW3nmmaJczlljapBkxOF5ku1rQgSmtpF6ck5R6G8YV6Rtkck+rYCb9MUwzzs8KYKDdSNt/UZntOr2jPfl84BK5tutdzktL4JTowWRXVDDGmGTNNb8athu5+q+6+atU9UAufcQ1jMd24deBVfiVt44u92kRDTDdHQNZiFNXNt7Hh99tpOx/Eh8w43OkvLMN/Ejy9z3HNiFCZpQXMHI/qxk+W0cUI90YH88eo3NIAJs6yzLlRVDPPUNlggebNC814oGYqHwwxfWJ/JV+nUsKaeN6ojb9EtPxu+Bp8YxnxRJr5NTJs7qJ2/rCnb2wNHO53TAOeyhiLj45WU1vvKbzsmI19kGZeo7beEtcnGv04F6WEvfAlS+29A97ED1kNfZVmdFJ7b4gMju+Y/Y/EaOanoGdEz28jG5UDZ+Mqs1EgMhJkozLOWdZyOHgf2U38F5yVSfRAdtyzbyhfz2oQqDRzK9lxDzzaI8ziQUozD5Md98CvVQuzeIACD5fIjnvgbrSzigcq8EB23AOFpKLCwUsiOy6wrGVCVj20rqt/rPbpoFUjd1mr2zrmhde4PqeNnS8d8ep2xRFH4Zo9B/fY46V6oAdB6T1Y8FQ2yvNTQjZnzetm2hLOX/ktvLbH04+d8QvXnXEUrtlzcI89/rceinqC3JWBkut2FOFiEPBUNtncC0cRHgZBT2UTDkIKB7HFvRlEVR1FuBgEPJWNkmtxFOFhEEW9SO7K4M6TVXAHEqDXoAFBlD8Il8WpeeE1rs8p/WjEEW9t++SIo3DNnoN77PHSPfpACaFzoIrchYSE/J8Iwi/aWUnJShx0aQAAAABJRU5ErkJggg==">';
@@ -48,14 +70,56 @@ $(document).ready(function() {
     let tshirt = '<img height="70px" width="70px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASMSURBVGhD3Zpbb1RVFMfH6IO+iL4YfVbxA/gBeAE6F7VyM0SIIPCmL8b45IMxJsaYEKnM3tMit5RY2hIKw620+0yn06mlMtPSBGakpa0tUO7lJipvi7UOe6A9s87p6VxP5p/80nbO3nv919ln9tmX+sqlus7GtwJq59JQj3yfoN/pM33Zmwol5esBJdcElQjjz3RAiYdBQ4IND4KGSGHZncFusXq5alqim6mSAF4Idcs6NN6O5h5bzC6Gx9SGPyZWUpu69cqI7mTAkOcYU0UihoMqXK/DlE/0nAcMoXgTJUTJrlB35F0dtrTyK7kFk/iXDVwGnsYKb9bhi9ey+HcvYZfv4YJVAkyoaV17+4vaTmFaO7D9FRyBolyASkIelsX3vaxtLU50F7yQRA7yUlDPVPNxskdIbc+dsMJWviFn1id2w7r4LvbaXDYn98PGxD722kJgz3ymbTpLD7GuRqdNffvhx6Hj0DF2BrIzY3Bv9hr0/z0MP6U72PIhZMdwFDIzF82yUzcn4fRECraPdMLWZDNbh+HRynj4HW3XXk7viU96f4Pv01E4PDoAY9fHTTMcI1eycOKvPvhq4HeojzXCmp4m+HawDY7hZ+MO9cavT5g35YehKMbazXog8GXcqe3yChmRVVxFupPpqXMwe2eGNcBxF8umps9DYiINycm0mRxXzg6q35aJ53nJEYrJj7Rti3Ce4zTtuHI1wwYsJ72j/awXgian2vl84RzHz1XIkcUeuTfrvkeK5cbtaTie7WG95DAnmlbpWSxbgYheTMCdW1Ns0HKQmhqBn9NHWC9zaNX2n6o+/str+KHjVPzrwVa4eeMSG7Qc9I6fgc/7nIdovPn/+U81vKrTwAmhEV7LFbQyffUCG7QU3LX83TOaZD3kMXfaTys7tpCFLvzyJbDLI+cVfDnQAmcvly6xA9mE2Sa1HZ8chgZ833AerOAA9atOw3yTp7hCCzGIwytnqhCaMwk2xkLgm/5PnQZ90R3X2LZ4IRHkgZlEMB5+k7noCo8kAiu65Bu+uph8j7voBq8kQvNDH+05cRfd4JVEKIfaSaRmHq2a+bKbI5e5jckXcsIbiYj7ZhKkmnkhup2iWPFEIoZo0GlgIt1iNVdoIbyQyLyVojmNV+J/rqAT1U6ENknmTeNJ+GEbV9iJqieixEFt/7norIMr7ET1eySyQtufI9p8UHKIq2BHdRMRKe08X3bbQXZUMxG86R9o27zokIWryFHKRPZmnHdM5qHESW3XXrQd6XbLtBmXp5ypxUIbf98MHmJj5KHkP/5Y49varrNCSm5iG2HY1n8AvvijpSg+Texl2+YRG7VNd8IKkm+oiuAMRNtzr5o56CHRcVfAkEe5hisJJtFR8NFbTmbPGKKJC1AR8HEquCc40VExNvwoL1C5oNFJRTbo8KUVDXvYO6fZwKUE3xOuh9hiRFNnOp9gTRQBtek3xIc6TOVE5xNooJV2xa2m3EJ1kRZ+Alhh0ZoAH7mPkQY0d5bW0VbDzxH3aXlKZaln89YTXhPtbNA/xtCekwn+/my3o+Ty+Z4AzN/5CveQKRIAAAAASUVORK5CYII=">';
     let hoodie = '<img height="70px" width="70px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAeCSURBVGhDzVpZc1RFFI6lD/ri8mLps9sP8De4PLjrm5ZaWoWKUEWZ+AARSCTIpkACRBERRYuEAUICIZk7EzKQdfaZhMxMcicUJb8AZNG39nx3umf63jl3mSRETtVXTLr7nnO+231On+5L072SYnH46eLV6POlReNFAL/RJrvvT5n9a/CJkhl9t2RGDs6bkfR8OfI3QXAolSM3500jRThQXIi8c/Vq9DGp5v8RIcQD5NQr5FyI/v3X6XBQyGdDRdN4GTql+tURvElyIOd0yons/Ig4kZsQvflJkVkYYcfoKJWN7Hw5+qY0c+/EWvNlI8o54YQxd1m0TWfEN1NZC/gdoTZuLAOjsBh5TppdWSmZ4U9o/d9hjNYhMndJbJnOimYjJtYPDFloiVDbVEaMFC6xz9SBbJUWjI+l+eVLLBZ7iBQfrTPkghQtp/bptFjXPyjW9IRsWH9uSLTH0yIXYJlVYUYOCxF6ULqzNLl+feoRyi4DrAEX/JKZppkYrSOh0DIyJo5np9hnXUE+XLsWe1i61ZjgLTRKIk9vGktq7Zl+lgSw7ux5K14KZpTV4QryZUkzQw8HXk4KYQrm1smMWNN7iiUBfHbytBX8Y8VRVocXKNF0S/eCCbH/lFPkhzMz42LjeJIloANkQZrT4YeFcvRD6aa3IMUGzU5OnCYirZNp1vkqaLYwI0slQrg9Vw4/K911l6D7BIeB2THLSb8YwZiLQdMwg5JpDEt3eVlYNN7mHgyKKO0fcLKZ9gyOBPA1ZS2MmSo1HiM6qLJ4Q7ptF1k7+ZYdXsD+sJmchKNf9g3UkVg3cMHqa6ONkWyxOgKDilPpul2oxnmVfSAAkEqjtOaP56bEdtrw4OzGsaT4PNRXJbH2dL/YNJGy+nYk0lY8jRdjyyKEQlO6XxPqCDkH+gEEQjMTYptWUwGYlc2TKbFhKFol0hwepbYKSR27iFTf7PiSCNGxoVe6XxHaNR8nRQ2X4sdzk3WOKXTlCqJ1LFEhQplq03hKHMoX2LHAHzSbnA0vUNDfNc2hRyUNFITGe9xAL6QXLlbjgcOu1KyFL06dteJlWzwv9mXm2LHAFkKGdHK2vKGV/dbJjh3';
 
-  let item1 = document.getElementById('item1');
-  let item2 = document.getElementById('item2');
-  let item3 = document.getElementById('item3');
-  let item4 = document.getElementById('item4');
-  item1.innerHTML = beanie;
-  item2.innerHTML = tshirt;
-  item3.innerHTML = shorts;
-  item4.innerHTML = shoes1;
+    let item1 = document.getElementById('item1');
+    let item2 = document.getElementById('item2');
+    let item3 = document.getElementById('item3');
+    let item4 = document.getElementById('item4');
+    item1.innerHTML = beanie;
+    item2.innerHTML = tshirt;
+    item3.innerHTML = shorts;
+    item4.innerHTML = shoes1;
+
+    let record = {
+      temp: data.currently.temperature, // add temp,
+      wind: data.currently.windSpeed, // add wind,
+      humi: data.currently.humidity, // add humi,
+      tempRec: 3,
+      windRec: 3,
+      humiRec: 3,
+      rec: 3,
+      altered: 0,
+     time: data.currently.time
+    }
+
+    const client = stitch.Stitch.initializeDefaultAppClient('weatherwear-lhpvt');
+
+    //const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('weather');
+
+    client.auth.loginWithCredential(new stitch.AnonymousCredential()).then(user => {
+      client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('weather').collection('last').deleteOne({});
+    }).then(() => {
+      client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('weather').collection('last').insertOne(record);
+    }).then(docs => {
+      client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('weather').collection('rec').insertOne(record);
+    }).catch(err => {
+      console.error(err)
+    });
+
+    /*const client = stitch.Stitch.initializeDefaultAppClient('weatherwear-lhpvt');
+    client.auth.loginWithCredential(new stitch.AnonymousCredential()).then(user => {
+      
+      const mongodb = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas');
+      const db = mongodb.db('weather');
+
+      db.collection('last')
+        .deleteMany({});
+
+      db.collection('last')
+        .insertOne(record);
+
+      db.collection('rec')
+        .insertOne(record);
+    })*/
 
   }
 
@@ -93,25 +157,7 @@ $(document).ready(function() {
   
 })
   
-/*
 
-const client = stitch.Stitch.initializeDefaultAppClient('weatherwear-lhpvt');
-const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('owm');
-
-client.auth.loginWithCredential(new stitch.AnonymousCredential()).then(user => 
-  db.collection('WeatherData').updateOne({owner_id: client.auth.user.id}, {$set:{number:42}}, {upsert:true})
-).then(() => 
-  db.collection('WeatherData').find({owner_id: client.auth.user.id}, { limit: 100}).asArray()
-).then(docs => {
-  console.log("Found docs", docs)
-  console.log("[MongoDB Stitch] Connected to Stitch")
-}).catch(err => {
-  console.error(err)
-});
-
-})
-
-*/
 
 
 /*
