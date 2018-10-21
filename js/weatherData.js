@@ -2,8 +2,11 @@ $(document).ready(function() {
 
   function render(data) {
 
+<<<<<<< HEAD
     
     
+=======
+>>>>>>> 7ea0029311a07b04e0463c47e89395f8dcf60345
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const months = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -19,19 +22,24 @@ $(document).ready(function() {
     let currDate = document.getElementById('currDate');
     let city = document.getElementById('city');
     let summary = document.getElementById('summary');
+    let icon = document.getElementById('currIcon');
 
     currDay.innerHTML = days[day];
     currTemp.innerHTML = Math.floor(data.currently.temperature) + '°F';
     currDate.innerHTML = date + ' ' + months[month];
     city.innerHTML = thisCity;
     summary.innerHTML = data.currently.summary;
+    icon.src = updateIcon(data.currently.icon);
 
     let index;
     let nextDay;
     let nextMax;
     let nextMin;
     let nextIcon;
+<<<<<<< HEAD
     let iconNum;
+=======
+>>>>>>> 7ea0029311a07b04e0463c47e89395f8dcf60345
 
     for (let i = 0; i < 6; i++) {
       index = (day + i + 1) % 7;
@@ -39,11 +47,15 @@ $(document).ready(function() {
       nextMax = document.getElementById('nextMax' + (i+1));
       nextMin = document.getElementById('nextMin' + (i+1));
       nextIcon = document.getElementById('nextIcon' + (i+1));
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7ea0029311a07b04e0463c47e89395f8dcf60345
 
       nextDay.innerHTML = days[index];
       nextMax.innerHTML = Math.round(data.daily.data[i].temperatureHigh) + '°F';
       nextMin.innerHTML = Math.round(data.daily.data[i].temperatureMin) + '°F';
+<<<<<<< HEAD
 
       if (data.daily.data[i].icon == 'rain') {
         iconNum = 14;
@@ -61,6 +73,9 @@ $(document).ready(function() {
         iconNum = 5;
       }
       nextIcon.innerHTML = '<img src="images/icons/icon-' + iconNum + '.svg" alt="" width=48>';
+=======
+      nextIcon.src = updateIcon(data.daily.data[i].icon);
+>>>>>>> 7ea0029311a07b04e0463c47e89395f8dcf60345
     }
 
     let beanie = '<img height="70px" width="70px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMXSURBVGhD7ZbLa9RQFMajC8FqBaELH0jpQjdabRX8G6zzEMSNrgQXUgVFXAq6ENFKGd+Zqd05JlPIoFLUosU2oyiV1iYt2EKRNhkt7tUiPtp4zvS0Jp072skk6RXzgw8m95x7zneSuZMRQkJCQirjdmaLkMy0CqLcWxB+TkqbKfqPIGaahaT8A8xbTuGadJSyOCclxeAJzBQPQcKYmGmibI5JZoaKzBdLo2xOuSFvYJhmK5VeT7s4JHW3nmmaJczlljapBkxOF5ku1rQgSmtpF6ck5R6G8YV6Rtkck+rYCb9MUwzzs8KYKDdSNt/UZntOr2jPfl84BK5tutdzktL4JTowWRXVDDGmGTNNb8athu5+q+6+atU9UAufcQ1jMd24deBVfiVt44u92kRDTDdHQNZiFNXNt7Hh99tpOx/Eh8w43OkvLMN/Ejy9z3HNiFCZpQXMHI/qxk+W0cUI90YH88eo3NIAJs6yzLlRVDPPUNlggebNC814oGYqHwwxfWJ/JV+nUsKaeN6ojb9EtPxu+Bp8YxnxRJr5NTJs7qJ2/rCnb2wNHO53TAOeyhiLj45WU1vvKbzsmI19kGZeo7beEtcnGv04F6WEvfAlS+29A97ED1kNfZVmdFJ7b4gMju+Y/Y/EaOanoGdEz28jG5UDZ+Mqs1EgMhJkozLOWdZyOHgf2U38F5yVSfRAdtyzbyhfz2oQqDRzK9lxDzzaI8ziQUozD5Md98CvVQuzeIACD5fIjnvgbrSzigcq8EB23AOFpKLCwUsiOy6wrGVCVj20rqt/rPbpoFUjd1mr2zrmhde4PqeNnS8d8ep2xRFH4Zo9B/fY46V6oAdB6T1Y8FQ2yvNTQjZnzetm2hLOX/ktvLbH04+d8QvXnXEUrtlzcI89/rceinqC3JWBkut2FOFiEPBUNtncC0cRHgZBT2UTDkIKB7HFvRlEVR1FuBgEPJWNkmtxFOFhEEW9SO7K4M6TVXAHEqDXoAFBlD8Il8WpeeE1rs8p/WjEEW9t++SIo3DNnoN77PHSPfpACaFzoIrchYSE/J8Iwi/aWUnJShx0aQAAAABJRU5ErkJggg==">';
@@ -130,7 +145,7 @@ $(document).ready(function() {
   let url = darksky + key + '/' + lat + ',' + lng;
   console.log(url);
   url = url.concat('?units=us');
-  
+
   $.ajax({
     url: url,
     dataType: 'jsonp',
@@ -154,10 +169,33 @@ $(document).ready(function() {
     }
   });
 
-  
+
 })
+<<<<<<< HEAD
   
 
+=======
+
+/*
+
+const client = stitch.Stitch.initializeDefaultAppClient('weatherwear-lhpvt');
+const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('owm');
+
+client.auth.loginWithCredential(new stitch.AnonymousCredential()).then(user =>
+  db.collection('WeatherData').updateOne({owner_id: client.auth.user.id}, {$set:{number:42}}, {upsert:true})
+).then(() =>
+  db.collection('WeatherData').find({owner_id: client.auth.user.id}, { limit: 100}).asArray()
+).then(docs => {
+  console.log("Found docs", docs)
+  console.log("[MongoDB Stitch] Connected to Stitch")
+}).catch(err => {
+  console.error(err)
+});
+
+})
+
+*/
+>>>>>>> 7ea0029311a07b04e0463c47e89395f8dcf60345
 
 
 /*
