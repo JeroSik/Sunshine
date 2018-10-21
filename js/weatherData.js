@@ -153,7 +153,7 @@ $(document).ready(function() {
     let item4 = document.getElementById('item4');
     
     item1.innerHTML = beanie;
-    item2.innerHTML = tshirt;
+    item2.innerHTML = hoodie;
     item3.innerHTML = shorts;
     item4.innerHTML = shoes1;
 
