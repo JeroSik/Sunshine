@@ -46,18 +46,17 @@ function w_init() {
   wind_b.print();
 }
 
-w_init();
-
-function w_init() {
+function w_init(data) {
   var wind = [];
   var feel = [];
 
-  for (let i = 0; i < w_data.length; i++) {
-    wind[i] = w_data[i].wind;
-    feel[i] = w_data[i].feel;
+  for (let i = 0; i < data.length; i++) {
+    wind[i] = data[i].wind;
+    feel[i] = data[i].rec;
   }
 
   learnWindCoeff(wind, feel);
+  return {a: wind_a, b: wind_b};
   //wind_a.print();
   //wind_b.print();
 }

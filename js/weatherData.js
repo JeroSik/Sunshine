@@ -6,33 +6,32 @@ $(document).ready(function() {
     //data[i].temp data[i].humi data[i].wind data[i].res
     let wb = { tempA: 0, tempB: 0, humiA: 0, humiB: 0, windA: 0, windB: 0};
 
-    for (var i = 0; i < data.length; i+) {
-      
-    }
-
-    t_init();
-    h_init();
-    w_init();
+    let t = t_init(data);
+    let h = h_init(data);
+    let w = w_init(data);
+    
+    console.log(t.a);
  
-    wb.tempA = temp_a;
-    wb.tempB = temp_b;
-    wb.humiA = humid_a;
-    wb.humiB = humid_b;
-    wb.windA = wind_a;
-    wb.windB = wind_b;
+    wb.tempA = t.a;
+    wb.tempB = t.b;
+    wb.humiA = h.a;
+    wb.humiB = h.b;
+    wb.windA = w.a;
+    wb.windB = w.b;
  
     return wb;
   }
 
-  function getRes(data, wb) {
-    let res = 0;
+  function getRec(data, wb) {
+    let rec = 0;
+    console.log(JSON.stringify(wb));
     let temp_res = wb.tempA * data.temp + wb.tempB;
     let humid_res = wb.humiA * data.humi + wb.humiB;
     let wind_res = wb.windA * data.wind + wb.windB;
  
-    res =(temp_res + humid_res + wind_res) / 3;
+    rec = (temp_res + humid_res + wind_res) / 3;
 
-    return res;
+    return rec;
   }
   
   function getWb(callback) {
@@ -43,18 +42,17 @@ $(document).ready(function() {
       console.log(db);
       db.collection('wb').find().asArray().then(result => {
         let wb = result[0];
-        if (!wb) {
-          client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('weather').collection('res').find().asArray().then(data => {
+        if (true) {
+          client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('weather').collection('rec').find().asArray().then(data => {
             
  
           wb = { tempA: 0, tempB: 0, humiA: 0, humiB: 0, windA: 0, windB: 0}
           //train data then store to wb
-          wb = createModel(data); 
+          wb = createModel(data);
 
-          console.log(wb.tempA);
+          callback(wb);
           });
         }
-        callback(wb);
 
       });
  
@@ -146,6 +144,9 @@ $(document).ready(function() {
     let tshirt = '<img height="70px" width="70px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASMSURBVGhD3Zpbb1RVFMfH6IO+iL4YfVbxA/gBeAE6F7VyM0SIIPCmL8b45IMxJsaYEKnM3tMit5RY2hIKw620+0yn06mlMtPSBGakpa0tUO7lJipvi7UOe6A9s87p6VxP5p/80nbO3nv919ln9tmX+sqlus7GtwJq59JQj3yfoN/pM33Zmwol5esBJdcElQjjz3RAiYdBQ4IND4KGSGHZncFusXq5alqim6mSAF4Idcs6NN6O5h5bzC6Gx9SGPyZWUpu69cqI7mTAkOcYU0UihoMqXK/DlE/0nAcMoXgTJUTJrlB35F0dtrTyK7kFk/iXDVwGnsYKb9bhi9ey+HcvYZfv4YJVAkyoaV17+4vaTmFaO7D9FRyBolyASkIelsX3vaxtLU50F7yQRA7yUlDPVPNxskdIbc+dsMJWviFn1id2w7r4LvbaXDYn98PGxD722kJgz3ymbTpLD7GuRqdNffvhx6Hj0DF2BrIzY3Bv9hr0/z0MP6U72PIhZMdwFDIzF82yUzcn4fRECraPdMLWZDNbh+HRynj4HW3XXk7viU96f4Pv01E4PDoAY9fHTTMcI1eycOKvPvhq4HeojzXCmp4m+HawDY7hZ+MO9cavT5g35YehKMbazXog8GXcqe3yChmRVVxFupPpqXMwe2eGNcBxF8umps9DYiINycm0mRxXzg6q35aJ53nJEYrJj7Rti3Ce4zTtuHI1wwYsJ72j/awXgian2vl84RzHz1XIkcUeuTfrvkeK5cbtaTie7WG95DAnmlbpWSxbgYheTMCdW1Ns0HKQmhqBn9NHWC9zaNX2n6o+/str+KHjVPzrwVa4eeMSG7Qc9I6fgc/7nIdovPn/+U81vKrTwAmhEV7LFbQyffUCG7QU3LX83TOaZD3kMXfaTys7tpCFLvzyJbDLI+cVfDnQAmcvly6xA9mE2Sa1HZ8chgZ833AerOAA9atOw3yTp7hCCzGIwytnqhCaMwk2xkLgm/5PnQZ90R3X2LZ4IRHkgZlEMB5+k7noCo8kAiu65Bu+uph8j7voBq8kQvNDH+05cRfd4JVEKIfaSaRmHq2a+bKbI5e5jckXcsIbiYj7ZhKkmnkhup2iWPFEIoZo0GlgIt1iNVdoIbyQyLyVojmNV+J/rqAT1U6ENknmTeNJ+GEbV9iJqieixEFt/7norIMr7ET1eySyQtufI9p8UHKIq2BHdRMRKe08X3bbQXZUMxG86R9o27zokIWryFHKRPZmnHdM5qHESW3XXrQd6XbLtBmXp5ypxUIbf98MHmJj5KHkP/5Y49varrNCSm5iG2HY1n8AvvijpSg+Texl2+YRG7VNd8IKkm+oiuAMRNtzr5o56CHRcVfAkEe5hisJJtFR8NFbTmbPGKKJC1AR8HEquCc40VExNvwoL1C5oNFJRTbo8KUVDXvYO6fZwKUE3xOuh9hiRFNnOp9gTRQBtek3xIc6TOVE5xNooJV2xa2m3EJ1kRZ+Alhh0ZoAH7mPkQY0d5bW0VbDzxH3aXlKZaln89YTXhPtbNA/xtCekwn+/my3o+Ty+Z4AzN/5CveQKRIAAAAASUVORK5CYII=">';
     let hoodie = '<img height="70px" width="70px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAeCSURBVGhDzVpZc1RFFI6lD/ri8mLps9sP8De4PLjrm5ZaWoWKUEWZ+AARSCTIpkACRBERRYuEAUICIZk7EzKQdfaZhMxMcicUJb8AZNG39nx3umf63jl3mSRETtVXTLr7nnO+231On+5L072SYnH46eLV6POlReNFAL/RJrvvT5n9a/CJkhl9t2RGDs6bkfR8OfI3QXAolSM3500jRThQXIi8c/Vq9DGp5v8RIcQD5NQr5FyI/v3X6XBQyGdDRdN4GTql+tURvElyIOd0yons/Ig4kZsQvflJkVkYYcfoKJWN7Hw5+qY0c+/EWvNlI8o54YQxd1m0TWfEN1NZC/gdoTZuLAOjsBh5TppdWSmZ4U9o/d9hjNYhMndJbJnOimYjJtYPDFloiVDbVEaMFC6xz9SBbJUWjI+l+eVLLBZ7iBQfrTPkghQtp/bptFjXPyjW9IRsWH9uSLTH0yIXYJlVYUYOCxF6ULqzNLl+feoRyi4DrAEX/JKZppkYrSOh0DIyJo5np9hnXUE+XLsWe1i61ZjgLTRKIk9vGktq7Zl+lgSw7ux5K14KZpTV4QryZUkzQw8HXk4KYQrm1smMWNN7iiUBfHbytBX8Y8VRVocXKNF0S/eCCbH/lFPkhzMz42LjeJIloANkQZrT4YeFcvRD6aa3IMUGzU5OnCYirZNp1vkqaLYwI0slQrg9Vw4/K911l6D7BIeB2THLSb8YwZiLQdMwg5JpDEt3eVlYNN7mHgyKKO0fcLKZ9gyOBPA1ZS2MmSo1HiM6qLJ4Q7ptF1k7+ZYdXsD+sJmchKNf9g3UkVg3cMHqa6ONkWyxOgKDilPpul2oxnmVfSAAkEqjtOaP56bEdtrw4OzGsaT4PNRXJbH2dL/YNJGy+nYk0lY8jRdjyyKEQlO6XxPqCDkH+gEEQjMTYptWUwGYlc2TKbFhKFol0hwepbYKSR27iFTf7PiSCNGxoVe6XxHaNR8nRQ2X4sdzk3WOKXTlCqJ1LFEhQplq03hKHMoX2LHAHzSbnA0vUNDfNc2hRyUNFITGe9xAL6QXLlbjgcOu1KyFL06dteJlWzwv9mXm2LHAFkKGdHK2vKGV/dbJjh3';
 
+    let rec = getRec({temp: data.currently.temperature, humi: data.currently.humidity, wind: data.currently.windSpeed}, wb);
+    
+    
     let item1 = document.getElementById('item1');
     let item2 = document.getElementById('item2');
     let item3 = document.getElementById('item3');
@@ -160,10 +161,7 @@ $(document).ready(function() {
       temp: data.currently.temperature, // add temp,
       wind: data.currently.windSpeed, // add wind,
       humi: data.currently.humidity, // add humi,
-      tempRec: 3,
-      windRec: 3,
-      humiRec: 3,
-      rec: 3,
+      rec: rec,
       altered: 0,
      time: data.currently.time
     }

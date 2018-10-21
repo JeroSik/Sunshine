@@ -45,3 +45,18 @@ function h_init() {
   //humid_a.print();
   //humid_b.print();
 }
+
+function h_init(data) {
+  var humid = [];
+  var feel = [];
+
+  for (let i = 0; i < data.length; i++) {
+    humid[i] = data[i].humi;
+    feel[i] = data[i].rec;
+  }
+
+  learnHumidCoeff(humid, feel);
+  return {a: humid_a, b: humid_b};
+  //humid_a.print();
+  //humid_b.print();
+}

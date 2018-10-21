@@ -45,3 +45,18 @@ function t_init() {
   //temp_a.print();
   //temp_b.print();
 }
+
+function t_init(data) {
+  var temp = [];
+  var feel = [];
+
+  for (let i = 0; i < data.length; i++) {
+    temp[i] = data[i].temp;
+    feel[i] = data[i].rec;
+  }
+  
+  learnTempCoeff(temp, feel);
+  return {a: temp_a, b: temp_b};
+  //temp_a.print();
+  //temp_b.print();
+}
