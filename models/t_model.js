@@ -29,7 +29,7 @@ async function train(xs, ys, numIterations)  {
 async function learnTempCoeff(x, y) {
   const predictionsBefore = p_temp_feel(x);
   await train(x, y, numIterations);
-  const predictionsAfter = p_temp_feel(y);
+  const predictionsAfter = p_temp_feel(x);
 }
 
 function t_init() {

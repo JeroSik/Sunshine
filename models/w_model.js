@@ -29,7 +29,7 @@ function p_wind_feel(x) {
 async function learnWindCoeff(x, y) {
   const predictionsBefore = p_wind_feel(x);
   await train(x, y, numIterations);
-  const predictionsAfter = p_wind_feel(y);
+  const predictionsAfter = p_wind_feel(x);
 }
 
 function w_init() {

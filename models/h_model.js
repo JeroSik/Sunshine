@@ -29,7 +29,7 @@ function p_humid_feel(x) {
 async function learnHumidCoeff(x, y) {
   const predictionsBefore = p_humid_feel(x);
   await train(x, y, numIterations);
-  const predictionsAfter = p_humid_feel(y);
+  const predictionsAfter = p_humid_feel(x);
 }
 
 function h_init() {

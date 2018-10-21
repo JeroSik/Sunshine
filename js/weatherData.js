@@ -1,40 +1,64 @@
 $(document).ready(function() {
-
+  
   const client = stitch.Stitch.initializeDefaultAppClient('weatherwear-lhpvt');
+
+  function createModel(data) {
+    //data[i].temp data[i].humi data[i].wind data[i].res
+    let wb = { tempA: 0, tempB: 0, humiA: 0, humiB: 0, windA: 0, windB: 0};
+
+    for (var i = 0; i < data.length; i+) {
+      
+    }
+
+    t_init();
+    h_init();
+    w_init();
+ 
+    wb.tempA = temp_a;
+    wb.tempB = temp_b;
+    wb.humiA = humid_a;
+    wb.humiB = humid_b;
+    wb.windA = wind_a;
+    wb.windB = wind_b;
+ 
+    return wb;
+  }
+
+  function getRes(data, wb) {
+    let res = 0;
+    let temp_res = wb.tempA * data.temp + wb.tempB;
+    let humid_res = wb.humiA * data.humi + wb.humiB;
+    let wind_res = wb.windA * data.wind + wb.windB;
+ 
+    res =(temp_res + humid_res + wind_res) / 3;
+
+    return res;
+  }
+  
   function getWb(callback) {
     let wb = undefined;
-    client.auth.loginWithCredential(new stitch.AnonymousCredential()).then(user => {
-      let wb = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('weather').collection('wb').find();
-      console.log(wb.tempA);
-      if (!wb) {
-        let data = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('weather').collection('res').find();
+    client.auth.loginWithCredential(new stitch.AnonymousCredential())
+    .then(user => {
+      let db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('weather');
+      console.log(db);
+      db.collection('wb').find().asArray().then(result => {
+        let wb = result[0];
+        if (!wb) {
+          client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('weather').collection('res').find().asArray().then(data => {
+            
+ 
+          wb = { tempA: 0, tempB: 0, humiA: 0, humiB: 0, windA: 0, windB: 0}
+          //train data then store to wb
+          wb = createModel(data); 
 
-        wb = {
-          tempA: 0,
-          tempB: 0,
-          humiA: 0,
-          humiB: 0,
-          windA: 0,
-          windB: 0
+          console.log(wb.tempA);
+          });
         }
-        //train data then store to wb
+        callback(wb);
 
-        t_init();
-        h_init();
-        w_init();
-
-        wb.tempA = temp_a;
-        wb.tempB = temp_b;
-        wb.humiA = humid_a;
-        wb.humiB = humid_b;
-        wb.windA = wind_a;
-        wb.windB = wind_b;
-
-        console.log(wb.tempA);
-     } 
-    })
-
-    callback(wb);
+      });
+ 
+    });
   }
 
   function render(data, wb) {
@@ -69,7 +93,7 @@ $(document).ready(function() {
         iconNum = 8;
       } else if (noti == 'partly-cloudy-day') {
         iconNum = 3;
-      } else if (noti == 'partly-cloudy-night' || data.daily.data[i].icon == 'cloudy') {
+      } else if (noti == 'partly-cloudy-night' || noti == 'cloudy') {
         iconNum = 5;
       } else if (noti == 'clear-day') {
         iconNum = 1;
