@@ -2,14 +2,12 @@ $(document).ready(function() {
 
   const client = stitch.Stitch.initializeDefaultAppClient('weatherwear-lhpvt');
   function getWb(callback) {
-
     let wb = undefined;
     client.auth.loginWithCredential(new stitch.AnonymousCredential()).then(user => {
       let wb = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('weather').collection('wb').find();
-      console.log(wb);
-     if (!wb) {
-      
-      let data = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('weather').collection('res').find();
+      console.log(wb.tempA);
+      if (!wb) {
+        let data = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('weather').collection('res').find();
 
         wb = {
           tempA: 0,
@@ -20,6 +18,19 @@ $(document).ready(function() {
           windB: 0
         }
         //train data then store to wb
+
+        t_init();
+        h_init();
+        w_init();
+
+        wb.tempA = temp_a;
+        wb.tempB = temp_b;
+        wb.humiA = humid_a;
+        wb.humiB = humid_b;
+        wb.windA = wind_a;
+        wb.windB = wind_b;
+
+        console.log(wb.tempA);
      } 
     })
 
